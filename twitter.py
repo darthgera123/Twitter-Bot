@@ -16,6 +16,7 @@ def retweet(keyword):
     for tweet in tweepy.Cursor(api.search, keyword).items(number):
         try:
             tweet.retweet()
+            tweet.favorite()
             print('retweeted') 
             print(tweet.text)
 
@@ -51,8 +52,28 @@ def searching(keyword):
             print('Searched done for the day')
             break
 
+""" This string will do an update on the timeline """
+def update(string):
+    try :
+        api.update_status(string)
+    except Exception as e:
+        print("Failed due to error "+ e)
+
+""" Return current trending topics """
+def trendy():
+    try:
+        trends = api.trends_available()
+        for trend in trends:
+            all_trends = set()
+
+            # all_trends.add(api.trends_place(trend['woeid']))
+            b = api.trends_place(trend['woeid'])
+            print(b[0][1])
+        # print(all_trends)
+    except Exception as e:
+        print("Failed due to error "+ str(e))
 if __name__ == '__main__':
-    keyword =  raw_input("Enter keyword for retweet ")
-    # retweet(keyword)
-    searching(keyword)
+    # keyword =  raw_input("Enter keyword for retweet ")
+    # print(api.trends_available())
+    trendy()
 
