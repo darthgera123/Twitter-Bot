@@ -16,12 +16,19 @@ def retweet(keyword):
     for tweet in tweepy.Cursor(api.search, keyword).items(number):
         try:
             tweet.retweet()
+<<<<<<< HEAD
             tweet.favorite()
+=======
+>>>>>>> origin/master
             print('retweeted') 
             print(tweet.text)
 
         except tweepy.TweepError as e:
+<<<<<<< HEAD
             print(str(e.message[0]['message']))
+=======
+            print(str(e.message))
+>>>>>>> origin/master
         except StopIteration:
             break
         except KeyboardInterrupt:
